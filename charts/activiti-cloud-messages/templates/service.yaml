@@ -1,0 +1,3 @@
+{{- template "common.service" (list . "activiti.messages.service") -}}
+{{- define "activiti.messages.service" -}}
+{{- end -}}

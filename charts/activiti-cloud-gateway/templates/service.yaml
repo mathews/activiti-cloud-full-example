@@ -1,0 +1,3 @@
+{{- template "common.service" (list . "activiti.gateway.service") -}}
+{{- define "activiti.gateway.service" -}}
+{{- end -}}

@@ -1,0 +1,3 @@
+{{- template "common.ingress" (list . "activiti.messages.ingress") -}}
+{{- define "activiti.messages.ingress" -}}
+{{- end -}}

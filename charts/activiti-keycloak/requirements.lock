@@ -1,0 +1,9 @@
+dependencies:
+- name: keycloak
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 3.1.0
+- name: common
+  repository: https://activiti.github.io/activiti-cloud-helm-charts/
+  version: 1.1.26
+digest: sha256:7f32266b34be8069d8eaf92282b5d084ddb9394db172d6058bb7ef60ed6a46e3
+generated: 2019-11-06T11:19:18.586561019Z

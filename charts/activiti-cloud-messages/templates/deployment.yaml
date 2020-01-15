@@ -1,0 +1,46 @@
+{{- template "common.deployment" (list . "activiti.messages.deployment") -}}
+{{- define "activiti.messages.deployment" -}}
+spec:
+  template:
+    spec:
+      initContainers:
+      {{- if .Values.postgres.enabled }}
+        - name: wait-for-postgresql
+          image: {{ .Values.init.container.image | quote }}
+          imagePullPolicy: {{ .Values.init.container.imagePullPolicy }}
+          env:
+            - name: POSTGRES_NAME
+              value: {{ printf "%s-%s" .Release.Name .Values.postgres.name | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}
+          command:
+            - sh
+            - -c
+            - |
+              until printf "." && nc -z -w 2 $POSTGRES_NAME $POSTGRES_PORT; do
+                  sleep 2;
+              done;
+              echo 'PostgreSQL OK ✓'
+      {{- end }}
+      {{- if .Values.rabbitmq.enabled }}
+        - name: wait-for-rabbitmq
+          image: {{ .Values.init.container.image | quote }}
+          imagePullPolicy: {{ .Values.init.container.imagePullPolicy }}
+          env: 
+            - name: RABBITMQ_NAME
+              value: {{ include "activiti.messages.rabbitmq-name" . | quote }}
+            - name: RABBITMQ_PORT
+              value: {{ include "activiti.messages.rabbitmq-port" . | quote }}
+          command:
+            - sh
+            - -c
+            - |
+              until printf "." && nc -z -w 2 $RABBITMQ_NAME $RABBITMQ_PORT; do
+                  sleep 2;
+              done;
+              echo 'RabbitMq OK ✓'
+      {{- end }}      
+      {{- if .Values.extraInitContainers }}
+{{ tpl .Values.extraInitContainers . | indent 8 }}
+      {{- end }}
+{{- end -}}

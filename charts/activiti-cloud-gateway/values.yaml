@@ -1,0 +1,59 @@
+# Default values for Maven projects.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+javaOpts:
+  xmx: 1024m
+  xms: 256m
+  other: -XX:+UnlockExperimentalVMOptions  -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+# only set this variable if a private registry secret is needed to pull the image
+#registryPullSecrets: private-registry-secret
+image:
+  repository: docker.io/activiti/activiti-cloud-gateway
+  tag: 7.1.19
+  pullPolicy: IfNotPresent
+service:
+  name: gateway
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 8080
+  annotations:
+    fabric8.io/expose: "false"
+resources:
+  limits:
+    cpu: 1
+    memory: 1024Mi
+  requests:
+    cpu: 150m
+    memory: 256Mi
+probePath: /actuator/health
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 15
+  timeoutSeconds: 4
+  successThreshold: 1
+  failureThreshold: 4
+readinessProbe:
+  initialDelaySeconds: 20
+  periodSeconds: 15
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 4
+terminationGracePeriodSeconds: 10
+
+## Allows the specification of additional environment variables
+extraEnv: |
+
+ingress:
+  enabled: true
+
+  path: /
+
+  ## Set this to true in order to enable TLS on the ingress record
+  tls: # true | false
+
+  ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
+  tlsSecret: 
+
+  ## Ingress annotations done as key:value pairs
+  annotations: {}
