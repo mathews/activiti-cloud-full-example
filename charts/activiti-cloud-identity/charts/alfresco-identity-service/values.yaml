@@ -108,8 +108,8 @@ keycloak:
       existingClaim: "alfresco-volume-claim"
       subPath: "alfresco-identity-service/database-data"
     resources:
-      requests:
-        memory: "250Mi"
+      # requests:
+      #   memory: "250Mi"
       limits:
         memory: "500Mi"
 

@@ -76,9 +76,9 @@ service:
     fabric8.io/expose: "false"
     fabric8.io/ingress.annotations: "kubernetes.io/ingress.class: nginx"
 resources:
-  requests:
-    cpu: 250m
-    memory: 1024Mi
+  # requests:
+  #   cpu: 250m
+  #   memory: 1024Mi
 probePath: '/actuator/health'
 livenessProbe:
   initialDelaySeconds: 60

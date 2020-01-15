@@ -74,9 +74,9 @@ frontend:
     limits:
       cpu: 500m
       memory: 1024Mi
-    requests:
-      cpu: 200m
-      memory: 256Mi
+    # requests:
+    #   cpu: 200m
+    #   memory: 256Mi
   probePath: /
   livenessProbe:
     initialDelaySeconds: 60
@@ -119,9 +119,9 @@ backend:
   resources:
     limits:
       memory: 1024Mi
-    requests:
-      cpu: 400m
-      memory: 512Mi
+    # requests:
+    #   cpu: 400m
+    #   memory: 512Mi
   probePath: '{{ if .Values.ingress.enabled }} {{ include "activiti-cloud-modeling.ingress-path-backend" . }}{{ end }}/actuator/health' #for ingress
 
   livenessProbe:

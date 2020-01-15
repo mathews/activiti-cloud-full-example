@@ -187,9 +187,9 @@ postgres:
   enabled: true
   postgresqlPassword: password
   resources:
-    requests:
-      cpu: 350m
-      memory: 512Mi
+    # requests:
+    #   cpu: 350m
+    #   memory: 512Mi
 
 rabbitmq:
   enabled: true
@@ -201,9 +201,9 @@ rabbitmq:
   rabbitmqPassword: "guest"
   rabbitmqErlangCookie: 124567890abcdefghijklmnopqrstuv
   resources:
-    requests:
-      cpu: 350m
-      memory: 512Mi
+    # requests:
+    #   cpu: 350m
+    #   memory: 512Mi
   rbac:
     create: true
   replicaCount: 1

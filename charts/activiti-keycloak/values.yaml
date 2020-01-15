@@ -5,9 +5,9 @@ keycloak:
       limits:
         cpu: 1
         memory: "2048Mi"
-      requests:
-        cpu: "300m"
-        memory: "512Mi"
+      # requests:
+      #   cpu: "300m"
+      #   memory: "512Mi"
     username: admin
     password: admin
     persistence:
